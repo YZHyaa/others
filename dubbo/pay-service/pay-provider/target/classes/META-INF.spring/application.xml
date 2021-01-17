@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:dubbo="http://dubbo.apache.org/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://dubbo.apache.org/schema/dubbo http://dubbo.apache.org/schema/dubbo/dubbo.xsd">
+    <!-- xmlns用于声明当前spring的xml的命名空间 -->
+    <!-- 注：不同类型的xml有不同的文件头-->
+
+
+    <!-- dubbo:application 提供方应用信息，是服务跟踪监控依据 -->
+    <!-- 该标签下提供了name owner organization等-->
+    <dubbo:application name="pay-service"/>
+
+    <!-- dubbo:registry 注册中心的相关信息-->
+    <!-- 注：若不配置注册中心直接调用address=N/A-->
+    <!--     若用注册中心则要引入其相应客户端jar包（如curator）,并且url前要加上zookeeper://-->
+    <!--<dubbo:registry address="zookeeper://39.105.136.112:2181"/>-->
+    <dubbo:registry address="N/A"/>
+
+    <!-- dubbo:protocol 以什么协议发布服务-->
+    <!-- name具体协议，port服务发布端口-->
+    <!-- 注：只有要发布的服务才需要定义协议-->
+    <dubbo:protocol name="dubbo" port="20880"/>
+
+    <!-- dubbo:service 服务相关信息 -->
+    <!-- interface是服务名（接口），ref是具体的服务Bean-->
+    <!-- 注：只要服务发布方，才需要定义服务名与服务Bean-->
+    <dubbo:service interface="com.xupt.yzh.IPayService" ref="payServic"/>
+    <bean id="payServic" class="com.xupt.yzh.PayServiceImpl"/>
+
+</beans>

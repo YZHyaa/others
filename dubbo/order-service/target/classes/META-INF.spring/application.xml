@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:dubbo="http://dubbo.apache.org/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://dubbo.apache.org/schema/dubbo http://dubbo.apache.org/schema/dubbo/dubbo.xsd">
+    <!-- xmlns用于声明当前spring的xml的命名空间 -->
+    <!-- 注：不同类型的xml有不同的文件头-->
+
+
+    <dubbo:application name="order-service"/>
+
+    <!--<dubbo:registry address="zookeeper://39.105.136.112:2181"/>-->
+    <dubbo:registry address="N/A"/>
+
+    <!-- 通过接口找到被发布的服务-->
+    <!-- interface是服务名，url是服务路径，id是对找到的服务Bean重新赋予的名-->
+    <!-- 注：当有注册中心时，就不需要url了-->
+    <dubbo:reference interface="com.xupt.yzh.IPayService" id="PayService"
+        url="dubbo://192.168.56.1:20880/com.xupt.yzh.IPayService"/>
+
+</beans>
